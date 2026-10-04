@@ -11,5 +11,5 @@ int main() {
         buf[0] = '\0';
     }
     checkwf(buf, csev, ':');
-    printf("%s", csev);
+    runfunc(csev);
 }

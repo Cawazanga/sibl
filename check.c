@@ -50,3 +50,27 @@ void checkwf(const char *buf, char *var, const char doas)
     var[j] = '\0';
 
 }
+void checkwd(const char *buf, char from, char *var)
+{
+    bool start = false;
+    int j = 0;
+
+    for (int i = 0; buf[i] != '\0'; i++) {
+
+        if (start == false && buf[i] == from) {
+            start = true;
+            continue;
+        }
+        if (start == true) {
+            var[j] = buf[i];
+            j++;
+        }
+        if (buf[i] == '\0') {
+            printf("Error");
+            exit(-1);
+        }
+    }
+
+    var[j] = '\0';
+
+}
