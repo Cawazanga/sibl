@@ -8,7 +8,12 @@ int runfunc(const char *bodyb) {
     if (strcmp(namefunc, "putl") == 0) {
         char putbuf[64];
         checkwd(bodyb, '^', putbuf);
-        puts(putbuf);
+        printf("%s\n", putbuf);
+    }
+    if (strcmp(namefunc, "puts") == 0) {
+        char putbuf[64];
+        checkwd(bodyb, '^', putbuf);
+        printf("%s", putbuf);
     }
 
     return 0;
