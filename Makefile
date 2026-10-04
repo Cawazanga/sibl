@@ -1,7 +1,7 @@
 CC = gcc
 
 TARGET = sibl
-SRC = main.c cmdline.c parser.c
+SRC = main.c check.c
 
 $(TARGET): $(SRC)
 	$(CC) $(SRC) -o $(TARGET)
