@@ -1,7 +1,7 @@
 CC = gcc
 
 TARGET = sibl
-SRC = main.c check.c runfunc.c
+SRC = main.c check.c runfunc.c algpars.c
 
 $(TARGET): $(SRC)
 	$(CC) $(SRC) -o $(TARGET)
