@@ -1,6 +1,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
+#include <unistd.h>
 #include "func.h"
 int runfunc(const char *bodyb) {
     char namefunc[48];
@@ -66,6 +68,11 @@ int runfunc(const char *bodyb) {
         char putbuf[24];
         checkwd(bodyb, '^', putbuf);
         printf("%d", vararr[searchvar(putbuf)].cap);
+    }
+    if (strcmp(namefunc, "delay") == 0) {
+        char putbuf[24];
+        checkwd(bodyb, '^', putbuf);
+        sleep(atoi(putbuf));
     }
     return 0;
 }
