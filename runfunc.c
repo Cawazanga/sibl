@@ -37,5 +37,11 @@ int runfunc(const char *bodyb) {
         checkwd(bodyb, '^', runcomm);
         system(runcomm);
     }
+    if (strcmp(namefunc, "putw") == 0) {
+        char putbuf[64];
+        checkwd(bodyb, '^', putbuf);
+        printf("%s ", putbuf);
+    }
+ 
     return 0;
 }
