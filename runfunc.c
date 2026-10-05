@@ -42,6 +42,30 @@ int runfunc(const char *bodyb) {
         checkwd(bodyb, '^', putbuf);
         printf("%s ", putbuf);
     }
- 
+    if (strcmp(namefunc, "v") == 0) {
+        char putbuf1[24];
+        char putbuf11[24];
+        char putbuf2[24];
+        char putbuf12[24];
+        char putbuf3[24];
+
+        checkwd(bodyb, '^', putbuf1);
+        checkwf(putbuf1,  putbuf11, '^');
+        checkwd(putbuf1, '^', putbuf2);
+        checkwf(putbuf2,  putbuf12, '^');
+        checkwd(putbuf2, '^', putbuf3);
+
+        workvar(atoi(putbuf11), putbuf12, atoi(putbuf3));
+    }
+    if (strcmp(namefunc, "putvl") == 0) {
+        char putbuf[24];
+        checkwd(bodyb, '^', putbuf);
+        printf("%d\n", vararr[searchvar(putbuf)].cap);
+    }
+    if (strcmp(namefunc, "putv") == 0) {
+        char putbuf[24];
+        checkwd(bodyb, '^', putbuf);
+        printf("%d", vararr[searchvar(putbuf)].cap);
+    }
     return 0;
 }

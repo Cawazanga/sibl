@@ -1,5 +1,6 @@
 #include "func.h"
 #include <stdio.h>
+
 int main() {
     while (1) {
         char buf[128];
