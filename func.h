@@ -8,7 +8,7 @@ void checkwd(const char *buf, char from, char *var);
 int runfunc(const char *bodyb);
 char runbuf(const char *buf);
 int algpars(const char *buf);
-int workvar(int arg, const char *namevar, int value);
+int workvar(int arg, const char *namevar, const char *value);
 int searchvar(const char *namevar);
 int getnumargforvar(const char *argname);
 struct intvar {

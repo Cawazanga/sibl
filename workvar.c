@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -5,15 +6,16 @@
 #include <stdbool.h>
 #include "func.h"
 void initvar(const char *namevar, int value);
-int workvar(int arg, const char *namevar, int value) {
+int workvar(int arg, const char *namevar, const char *value) {
     switch (arg) {
         case 1:
-            initvar(namevar, value);
+            initvar(namevar, atoi(value));
             break;
         case 2:
+            vararr[searchvar(namevar)].cap = algpars(value);
             break;
         case 3:
-            vararr[searchvar(namevar)].cap = value;
+            vararr[searchvar(namevar)].cap = atoi(value);
             break;
     }
 }

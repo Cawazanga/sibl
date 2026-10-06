@@ -57,7 +57,7 @@ int runfunc(const char *bodyb) {
         checkwf(putbuf2,  putbuf12, '^');
         checkwd(putbuf2, '^', putbuf3);
 
-        workvar(getnumargforvar(putbuf11), putbuf12, atoi(putbuf3));
+        workvar(getnumargforvar(putbuf11), putbuf12, putbuf3);
     }
     if (strcmp(namefunc, "putvl") == 0) {
         char putbuf[24];
