@@ -74,5 +74,23 @@ int runfunc(const char *bodyb) {
         checkwd(bodyb, '^', putbuf);
         sleep(atoi(putbuf));
     }
+    if (strcmp(namefunc, "tputrl") == 0) {
+        char putbuf1[24];
+        char putbuf11[24];
+        char putbuf2[24];
+        checkwd(bodyb, '^', putbuf1);
+        checkwf(putbuf1, putbuf11, '^');
+        checkwd(putbuf1, '^', putbuf2);
+        printf("%d\n", rand_range(atoi(putbuf11), atoi(putbuf2)));
+    }
+    if (strcmp(namefunc, "tputr") == 0) {
+        char putbuf1[24];
+        char putbuf11[24];
+        char putbuf2[24];
+        checkwd(bodyb, '^', putbuf1);
+        checkwf(putbuf1, putbuf11, '^');
+        checkwd(putbuf1, '^', putbuf2);
+        printf("%d", rand_range(atoi(putbuf11), atoi(putbuf2)));
+    }
     return 0;
 }

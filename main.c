@@ -1,7 +1,9 @@
 #include "func.h"
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <time.h>
 int main() {
+    srand((unsigned)time(NULL));
     while (1) {
         char buf[128];
         char csev[48];

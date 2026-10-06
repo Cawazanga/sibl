@@ -11,6 +11,7 @@ int algpars(const char *buf);
 int workvar(int arg, const char *namevar, const char *value);
 int searchvar(const char *namevar);
 int getnumargforvar(const char *argname);
+int rand_range(int min, int max);
 struct intvar {
     char name[12];
     int cap;
