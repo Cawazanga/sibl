@@ -10,6 +10,7 @@ char runbuf(const char *buf);
 int algpars(const char *buf);
 int workvar(int arg, const char *namevar, int value);
 int searchvar(const char *namevar);
+int getnumargforvar(const char *argname);
 struct intvar {
     char name[12];
     int cap;
