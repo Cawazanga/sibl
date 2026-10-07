@@ -15,7 +15,14 @@ int workvar(int arg, const char *namevar, const char *value) {
             vararr[searchvar(namevar)].cap = algpars(value);
             break;
         case 3:
-            vararr[searchvar(namevar)].cap = atoi(value);
+            if (value[0] == '$') {
+                char eqnamevar[12];
+                checkwd(value, '$', eqnamevar);
+                vararr[searchvar(namevar)].cap = vararr[searchvar(eqnamevar)].cap;
+            }
+            else
+                vararr[searchvar(namevar)].cap = atoi(value);
+
             break;
     }
 }
