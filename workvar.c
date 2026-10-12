@@ -19,6 +19,23 @@ int workvar(int arg, const char *namevar, const char *value) {
                 char eqnamevar[12];
                 checkwd(value, '$', eqnamevar);
                 vararr[searchvar(namevar)].cap = vararr[searchvar(eqnamevar)].cap;
+            } else if (value[0] == '#') {
+                switch (value[1]) {
+                    case 'r':
+                        char argsstr[16];
+                        char arg1[8];
+                        char arg2[8];
+                        check(value, '(', argsstr, ')');
+                        checkwf(argsstr, arg1, ',');
+                        checkwd(argsstr, ',', arg2);
+                        vararr[searchvar(namevar)].cap = rand_range(atoi(arg1), atoi(arg2));
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        puts("Error");
+                        exit(-1);
+                }
             }
             else
                 vararr[searchvar(namevar)].cap = atoi(value);

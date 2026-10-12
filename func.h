@@ -12,6 +12,7 @@ int workvar(int arg, const char *namevar, const char *value);
 int searchvar(const char *namevar);
 int getnumargforvar(const char *argname);
 int rand_range(int min, int max);
+int searchdef(const char *namedef);
 struct intvar {
     char name[12];
     int cap;
