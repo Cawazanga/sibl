@@ -14,7 +14,26 @@ int algpars(const char *buf) {
             char namevar[12];
             checkwd(ps1, '$', namevar);
             snprintf(s1, sizeof(s1), "%d", vararr[searchvar(namevar)].cap);
-        } else {
+        } else if (ps1[0] == '#') {
+            switch (ps1[1]) {
+                    case 'r':
+                        char argsstr[16];
+                        char arg1[8];
+                        char arg2[8];
+                        check(ps1, '(', argsstr, ')');
+                        checkwf(argsstr, arg1, ',');
+                        checkwd(argsstr, ',', arg2); 
+                        snprintf(s1, sizeof(s1), "%d", rand_range(atoi(arg1), atoi(arg2)));
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        puts("Error");
+                        exit(-1);
+            }   
+        } 
+        
+        else {
             snprintf(s1, sizeof(s1), "%s", ps1);
         }
     }
@@ -24,7 +43,25 @@ int algpars(const char *buf) {
             char namevar[12];
             checkwd(ps2, '$', namevar);
             snprintf(s2, sizeof(s2), "%d", vararr[searchvar(namevar)].cap);
-        } else {
+        } else if (ps2[0] == '#') {
+            switch (ps2[1]) {
+                    case 'r':
+                        char argsstr[16];
+                        char arg1[8];
+                        char arg2[8];
+                        check(ps2, '(', argsstr, ')');
+                        checkwf(argsstr, arg1, ',');
+                        checkwd(argsstr, ',', arg2); 
+                        snprintf(s2, sizeof(s2), "%d", rand_range(atoi(arg1), atoi(arg2)));
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        puts("Error");
+                        exit(-1);
+            }
+        }
+        else {
             snprintf(s2, sizeof(s2), "%s", ps2);
         }
     }
