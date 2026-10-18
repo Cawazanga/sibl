@@ -92,5 +92,10 @@ int runfunc(const char *bodyb) {
         checkwd(putbuf1, '^', putbuf2);
         printf("%d", rand_range(atoi(putbuf11), atoi(putbuf2)));
     }
+    if (strcmp(namefunc, "loop") == 0) {
+        char arg1[12];
+        checkwd(bodyb, '^', arg1);
+
+    }
     return 0;
 }
