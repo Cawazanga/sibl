@@ -93,9 +93,12 @@ int runfunc(const char *bodyb) {
         printf("%d", rand_range(atoi(putbuf11), atoi(putbuf2)));
     }
     if (strcmp(namefunc, "loop") == 0) {
-        char arg1[12];
-        checkwd(bodyb, '^', arg1);
-
+        char howmanyc[4];
+        char cycbuf[127];
+        check(bodyb, '^', howmanyc, '^');
+        check(bodyb, '[', cycbuf, ']');
+        for (int i = atoi(howmanyc); i != 0; i--)
+            runfunc(cycbuf);
     }
     return 0;
 }
