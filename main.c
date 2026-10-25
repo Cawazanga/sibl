@@ -2,7 +2,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int main() {
+#include <unistd.h>
+#include <string.h>
+
+int main(int argc, char **argv) {
+    if (argc == 2) {
+        const char *arg = argv[1];
+        if (!(arg[0] == '-' && arg[1] == '-')) {
+            if (access(arg, R_OK) == 0) {
+                srand((unsigned)time(NULL));
+                FILE *f = fopen(arg, "r");
+                if (!f) {
+                    perror("sibl");
+                    return 1;
+                }
+                char line[1024];
+                while (fgets(line, sizeof(line), f)) {
+                    size_t len = strlen(line);
+                    while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r')) {
+                        line[--len] = '\0';
+                    }
+                    if (len == 0)
+                        continue;
+                    if (line[0] == '#')
+                        continue;
+                    if (line[0] == ';')
+                        continue;
+                    char csev[512];
+                    checkwf(line, csev, ':');
+                    runfunc(csev);
+                }
+                fclose(f);
+                return 0;
+            }
+        }
+    }
     srand((unsigned)time(NULL));
     while (1) {
         char buf[128];
@@ -17,5 +51,5 @@ int main() {
         checkwf(buf, csev, ':');
         runfunc(csev);
     }
-
+    return 0;
 }
