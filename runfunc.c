@@ -103,10 +103,29 @@ int runfunc(const char *bodyb) {
     if (strcmp(namefunc, "ee") == 0) {
         char reresstr[99];
         int reres;
-        checkwd(namefunc, '^', reresstr);
+        checkwd(bodyb, '^', reresstr);
+        puts(reresstr);
         reres = atoi(reresstr);
         _exit(reres);
     }
-    else
+    if (strcmp(namefunc, "if") == 0) {
+        char inif[99];
+        char state[12];
+        char faandsa[49];
+        char fa[24];
+        char sa[24];
+        char rbuf[512];
+
+        checkwd(bodyb, '^', inif);
+        checkwf(inif, state, '^');
+        checkwd(inif, '^', faandsa);
+        checkwf(faandsa, fa, '^');
+        checkwd(faandsa, '^', sa);
+        if (ifthen(getnumargforvar(state), fa, sa)) {
+            check(bodyb, '[', rbuf, ']');
+            runfunc(rbuf);
+        } 
         return 0;
+    }
+    return -1;
 }

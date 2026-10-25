@@ -71,9 +71,6 @@ int getnumargforvar(const char *argname) {
         return 4;
     else if (strcmp(argname, "less") == 0 || strcmp(argname, "<") == 0)
         return 5;
-
-
-
     else {
         puts("Error");
         exit(-1);
