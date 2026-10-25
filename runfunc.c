@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -104,9 +105,9 @@ int runfunc(const char *bodyb) {
         char reresstr[99];
         int reres;
         checkwd(bodyb, '^', reresstr);
-        puts(reresstr);
         reres = atoi(reresstr);
-        _exit(reres);
+        fflush(stdout);
+        exit(reres);
     }
     if (strcmp(namefunc, "if") == 0) {
         char inif[99];
@@ -125,7 +126,43 @@ int runfunc(const char *bodyb) {
             check(bodyb, '[', rbuf, ']');
             runfunc(rbuf);
         } 
-        return 0;
     }
-    return -1;
+    if (strcmp(namefunc, "block") == 0) {
+        int i = 0;
+        while (i < 28 && blockarr[1].blocks[i][0] != '\0') {
+            char runnow[64];
+            checkwf(blockarr[1].blocks[i], runnow, ':');
+            runfunc(runnow);
+            i++;
+        }
+    }
+    if (strcmp(namefunc, "iblock") == 0) {
+        char line[128];
+        int i = 0;
+        while (i < 28 && fgets(line, sizeof(line), stdin)) {
+            size_t len = strlen(line);
+            while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r')) {
+                line[--len] = '\0';
+            }
+            if (len == 0) continue;
+            
+            char *percent = strchr(line, '%');
+            if (percent) {
+                *percent = '\0';
+                len = strlen(line);
+            }
+            
+            if (len > 0 && line[len - 1] == '|') {
+                line[--len] = '\0';
+            }
+            
+            if (len > 0) {
+                strncpy(blockarr[1].blocks[i], line, 63);
+                blockarr[1].blocks[i][63] = '\0';
+                i++;
+            }
+            
+            if (percent) break;
+        }
+    }    
 }

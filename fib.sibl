@@ -1,0 +1,11 @@
+v^init^a^0:
+putvl^a:
+v^init^b^1:
+putvl^b:
+v^init^c^0:
+v^init^t^0:
+loop^98[loop^1[v^equals^c^+ $a $b]]:
+loop^98[loop^1[putvl^c]]:
+loop^98[loop^1[v^equal^a^$b]]:
+loop^98[loop^1[v^equal^b^$c]]:
+ee^0:

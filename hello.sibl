@@ -1,2 +1,3 @@
-putl^hello:
-ee^-1:
+putl^hello this first programm on sibl!:
+loop^5^[putl^hello]:
+ee^:

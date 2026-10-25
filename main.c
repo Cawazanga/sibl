@@ -30,7 +30,32 @@ int main(int argc, char **argv) {
                         continue;
                     char csev[512];
                     checkwf(line, csev, ':');
-                    runfunc(csev);
+                    char cmd[64];
+                    checkwf(csev, cmd, '^');
+                    if (strcmp(cmd, "iblock") == 0) {
+                        char blockline[128];
+                        int i = 0;
+                        while (i < 28 && fgets(blockline, sizeof(blockline), f)) {
+                            size_t blen = strlen(blockline);
+                            while (blen > 0 && (blockline[blen - 1] == '\n' || blockline[blen - 1] == '\r')) {
+                                blockline[--blen] = '\0';
+                            }
+                            if (blen == 0) continue;
+                            
+                            char *percent = strchr(blockline, '%');
+                            if (percent) *percent = '\0';
+                            if (blen > 0 && blockline[blen - 1] == '|') blockline[--blen] = '\0';
+                            
+                            if (blen > 0) {
+                                strncpy(blockarr[1].blocks[i], blockline, 63);
+                                blockarr[1].blocks[i][63] = '\0';
+                                i++;
+                            }
+                            if (percent) break;
+                        }
+                    } else {
+                        runfunc(csev);
+                    }
                 }
                 fclose(f);
                 return 0;

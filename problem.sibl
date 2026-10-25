@@ -1,0 +1,8 @@
+putl^C = A × B:
+putl^naive:
+putl^for i = 0..N-1:
+putl^  for j = 0..N-1:
+putl^    C[i][j] = 0:
+putl^    for k = 0..N-1:
+putl^      C[i][j] = C[i][j] + A[i][k] * B[k][j]:
+putl^N in {1024, 2048}, float or double:

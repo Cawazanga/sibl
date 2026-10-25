@@ -6,6 +6,11 @@ int algpars(const char *buf) {
     char ps1[12], ps2[12];
     char s1[12], s2[12];
     int result;
+    if (buf[0] == '$') {
+        char namevar[12];
+        checkwd(buf, '$', namevar);
+        return vararr[searchvar(namevar)].cap;
+    }
     if (sscanf(buf, "%6s %7s %7s", op, ps1, ps2) != 3) {
         return atoi(op);
     }

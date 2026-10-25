@@ -14,14 +14,21 @@ int getnumargforvar(const char *argname);
 int rand_range(int min, int max);
 int searchdef(const char *namedef);
 bool ifthen(int charg, const char *fa, const char *sa);
+void initblockvar(const char *nameblock, char blockin[28][64]);
 
 struct intvar {
     char name[12];
     int cap;
 };
+struct blockvar {
+    char name[12];
+    char blocks[28][64];
+    int size;
+};
 extern char bufs[2048][1024];
 extern struct intvar vararr[64];
+extern struct blockvar blockarr[64];
 extern int countintarr;
-
+extern int countblockarr;
 
 #endif

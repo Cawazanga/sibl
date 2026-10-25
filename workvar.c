@@ -33,6 +33,7 @@ int workvar(int arg, const char *namevar, const char *value) {
                     case 2:
                         break;
                     default:
+                        puts("vv");
                         puts("Error");
                         exit(-1);
                 }
