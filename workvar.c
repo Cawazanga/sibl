@@ -63,10 +63,17 @@ int searchvar(const char *namevar) {
 int getnumargforvar(const char *argname) {
     if (strcmp(argname, "init") == 0)
         return 1;
-    else if (strcmp(argname, "equals") == 0)
+    else if (strcmp(argname, "equals") == 0 || strcmp(argname, "==") == 0)
         return 2;
-    else if (strcmp(argname, "equal") == 0)
+    else if (strcmp(argname, "equal") == 0 || strcmp(argname, "dequal") == 0 || strcmp(argname, "!=") == 0)
         return 3;
+    else if (strcmp(argname, "more") == 0 || strcmp(argname, ">") == 0)
+        return 4;
+    else if (strcmp(argname, "less") == 0 || strcmp(argname, "<") == 0)
+        return 5;
+
+
+
     else {
         puts("Error");
         exit(-1);

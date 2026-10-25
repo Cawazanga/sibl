@@ -27,7 +27,7 @@ int runfunc(const char *bodyb) {
         char putch[1];
         checkwd(bodyb, '^', putch);
         printf("%s\n", putch);
-    }
+    } 
     if (strcmp(namefunc, "puti") == 0) {
         char algbuf[48];
         checkwd(bodyb, '^', algbuf);
@@ -100,5 +100,13 @@ int runfunc(const char *bodyb) {
         for (int i = atoi(howmanyc); i != 0; i--)
             runfunc(cycbuf);
     }
-    return 0;
+    if (strcmp(namefunc, "ee") == 0) {
+        char reresstr[99];
+        int reres;
+        checkwd(namefunc, '^', reresstr);
+        reres = atoi(reresstr);
+        _exit(reres);
+    }
+    else
+        return 0;
 }

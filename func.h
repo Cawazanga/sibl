@@ -1,6 +1,6 @@
 #ifndef FUNC_H
 #define FUNC_H
-
+#include <stdbool.h>
 
 void check(const char *buf, char from, char *var, char doas);
 void checkwf(const char *buf, char *var, char doas);
@@ -13,6 +13,8 @@ int searchvar(const char *namevar);
 int getnumargforvar(const char *argname);
 int rand_range(int min, int max);
 int searchdef(const char *namedef);
+bool ifthen(int charg, const char *fa, const char *sa);
+
 struct intvar {
     char name[12];
     int cap;
