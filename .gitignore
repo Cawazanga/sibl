@@ -4,3 +4,6 @@ testforsibl/
 sibl
 # macos
 .DS_store
+# other
+.gitignore
+.*
