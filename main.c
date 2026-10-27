@@ -24,8 +24,6 @@ int main(int argc, char **argv) {
                     }
                     if (len == 0)
                         continue;
-                    if (line[0] == '#')
-                        continue;
                     if (line[0] == ';')
                         continue;
                     char csev[512];
