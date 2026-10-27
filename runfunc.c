@@ -110,20 +110,23 @@ int runfunc(const char *bodyb) {
         exit(reres);
     }
     if (strcmp(namefunc, "if") == 0) {
-        char inif[99];
-        char state[12];
-        char faandsa[49];
-        char fa[24];
-        char sa[24];
-        char rbuf[512];
-
-        checkwd(bodyb, '^', inif);
-        checkwf(inif, state, '^');
-        checkwd(inif, '^', faandsa);
-        checkwf(faandsa, fa, '^');
-        checkwd(faandsa, '^', sa);
-        if (ifthen(getnumargforvar(state), fa, sa)) {
-            check(bodyb, '[', rbuf, ']');
+        
+        char  putbuf1[1023];
+        char putbuf11[1023];
+        char  putbuf2[1023];
+        char putbuf12[1023];
+        char  putbuf3[1023];
+        char     rbuf[1023];
+        char putbuf13[1023];
+        
+        checkwd(bodyb, '^', putbuf1);
+        checkwf(putbuf1,  putbuf11, '^');
+        checkwd(putbuf1, '^', putbuf2);
+        checkwf(putbuf2,  putbuf12, '^');
+        checkwd(putbuf2, '^', putbuf3);
+        checkwf(putbuf3, putbuf13, '^');
+        check(putbuf3, '[', rbuf, ']');
+        if (ifthen(getnumargforvar(putbuf11), putbuf12, putbuf13)) {
             runfunc(rbuf);
         } 
     }
@@ -141,6 +144,7 @@ int runfunc(const char *bodyb) {
         int i = 0;
         while (i < 28 && fgets(line, sizeof(line), stdin)) {
             size_t len = strlen(line);
+        
             while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r')) {
                 line[--len] = '\0';
             }
