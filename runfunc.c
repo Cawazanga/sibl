@@ -128,7 +128,15 @@ int runfunc(const char *bodyb) {
         check(putbuf3, '[', rbuf, ']');
         if (ifthen(getnumargforvar(putbuf11), putbuf12, putbuf13)) {
             runfunc(rbuf);
+            ifs = false;
         } 
+        else
+            ifs = true;
+    }
+    if (strcmp(namefunc, "else") == 0) {
+        char runbuf[1023];
+        check(bodyb, '[', runbuf, ']');
+        elsethen(runbuf);
     }
     if (strcmp(namefunc, "block") == 0) {
         int i = 0;

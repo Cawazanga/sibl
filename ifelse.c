@@ -71,3 +71,11 @@ bool ifthen(int charg, const char *fa, const char *sa)
     return revalue;
 }
 
+void elsethen(const char *runbuf)
+{
+    if (ifs) 
+    {
+        runfunc(runbuf);
+    }
+}
+
