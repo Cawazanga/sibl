@@ -1,0 +1,9 @@
+v^init^main^0:
+
+iblock^:
+v^equals^main^+ 0 #r(-1000,1000):|
+putvl^main:|
+getstr^:|%
+
+loop^-1[block^]:
+ee^0:

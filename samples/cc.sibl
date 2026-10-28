@@ -1,0 +1,3 @@
+v^init^t1^4:
+getstr^:
+loop^$t1^[putl^Hekko]:

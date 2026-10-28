@@ -94,12 +94,20 @@ int runfunc(const char *bodyb) {
         printf("%d", rand_range(atoi(putbuf11), atoi(putbuf2)));
     }
     if (strcmp(namefunc, "loop") == 0) {
-        char howmanyc[4];
-        char cycbuf[127];
+        char howmanyc[127];
+        char   cycbuf[127];
         check(bodyb, '^', howmanyc, '^');
         check(bodyb, '[', cycbuf, ']');
+        if (howmanyc[0] == '$') {
+            char _2hmc[799];
+            checkwd(howmanyc, '$', _2hmc);
+            for (int i = vararr[searchvar(_2hmc)].cap; i != 0; i--)
+                runfunc(cycbuf);
+        
+        } else {
         for (int i = atoi(howmanyc); i != 0; i--)
             runfunc(cycbuf);
+        }
     }
     if (strcmp(namefunc, "ee") == 0) {
         char reresstr[99];
@@ -176,5 +184,12 @@ int runfunc(const char *bodyb) {
             
             if (percent) break;
         }
-    }    
+    }
+    if (strcmp(namefunc, "getstr") == 0) {
+        char tmp[1024];
+        if (scanf("%1023[^\n]", tmp) == 1)
+            scanf("%*c");
+        else
+            scanf("%*c");
+    }
 }

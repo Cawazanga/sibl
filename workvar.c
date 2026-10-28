@@ -62,7 +62,7 @@ int searchvar(const char *namevar) {
     return -1;
 }
 int getnumargforvar(const char *argname) {
-    if (strcmp(argname, "init") == 0)
+    if (strcmp(argname, "init") == 0 || strcmp(argname, "=") == 0)
         return 1;
     else if (strcmp(argname, "equals") == 0 || strcmp(argname, "==") == 0)
         return 2;
