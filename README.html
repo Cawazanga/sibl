@@ -1,0 +1,93 @@
+<h1>sibl</h1>
+
+<p>Простой интерпретируемый язык на C. Выполняет скрипты в формате <code>.sibl</code> с синтаксисом на основе <code>:</code> и <code>^</code>.</p>
+
+<h2>Сборка</h2>
+
+<p><code>bash
+make</code></p>
+
+<h2>Использование</h2>
+
+<p><code>bash
+./sibl &lt;file.sibl&gt;  # запуск скрипта из файла
+./sibl              # интерактивный режим</code></p>
+
+<h2>Синтаксис</h2>
+
+<h3>Вывод</h3>
+
+<ul>
+<li><code>putl^текст:</code> - вывести текст с переводом строки</li>
+<li><code>puts^текст:</code> - вывести текст без перевода строки</li>
+<li><code>putw^текст:</code> - вывести текст с пробелом</li>
+<li><code>put^x:</code> / <code>putc^x:</code> - вывести один символ</li>
+<li><code>putcl^x:</code> - вывести один символ с переводом строки</li>
+<li><code>puti^выражение:</code> - вычислить и вывести число</li>
+<li><code>putv^имя:</code> - вывести значение переменной</li>
+<li><code>putvl^имя:</code> - вывести значение переменной с переводом строки</li>
+</ul>
+
+<h3>Переменные</h3>
+
+<ul>
+<li><code>v^init^имя^значение:</code> - инициализировать переменную</li>
+<li><code>v^equals^имя^выражение:</code> - присвоить значение (арифметика/рандом)</li>
+<li><code>v^equal^имя^$другое:</code> / <code>v^dequal^имя^...</code> - копировать переменную</li>
+</ul>
+
+<h3>Арифметика</h3>
+
+<p>Поддерживается в <code>v^equals</code> и <code>puti</code>:</p>
+
+<ul>
+<li><code>+</code> сложение</li>
+<li><code>-</code> вычитание</li>
+<li><code>*</code> умножение</li>
+<li><code>/</code> деление</li>
+</ul>
+
+<p>Ссылки: <code>$переменная</code>, случайное: <code>#r(min,max)</code></p>
+
+<h3>Блоки кода</h3>
+
+<ul>
+<li><code>iblock^:</code> - начать ввод блока. Строки заканчиваются <code>|</code>, блок завершается <code>%</code></li>
+<li><code>block^:</code> - выполнить сохранённый блок</li>
+</ul>
+
+<h3>Управление потоком</h3>
+
+<ul>
+<li><code>loop^N[код]:</code> - цикл N раз</li>
+<li><code>if^оператор^$a^$b^[код]:</code> - условие (equals/==, !=, &gt;, &lt;)</li>
+<li><code>ee^код:</code> - выход из программы</li>
+</ul>
+
+<h3>Прочее</h3>
+
+<ul>
+<li><code>delay^секунды:</code> - пауза</li>
+<li><code>syscomm^команда:</code> - выполнить shell команду</li>
+<li><code>tputrl^min^max:</code> - случайное число с переводом строки</li>
+<li><code>tputr^min^max:</code> - случайное число без перевода строки</li>
+<li><code>getstr^:</code> - прочитать строку из stdin</li>
+</ul>
+
+<h2>Пример</h2>
+
+<p><code>sibl
+v^init^a^0:
+putvl^a:
+v^init^b^1:
+putvl^b:
+v^init^c^0:
+loop^98[
+v^equals^c^+ $a $b:
+putvl^c:
+v^equals^a^$b:
+v^equals^b^$c:
+]:
+ee^0:</code></p>
+
+<p>Выводит числа Фибоначчи.</p>
