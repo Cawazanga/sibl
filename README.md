@@ -60,17 +60,19 @@ make
 ## Пример
 
 ```sibl
+iblock^:
+v^equals^c^+ $a $b:|
+putvl^c:|
+v^equals^a^$b:|
+v^equals^b^$c:|%
+
 v^init^a^0:
 putvl^a:
 v^init^b^1:
 putvl^b:
 v^init^c^0:
-loop^98[
-    v^equals^c^+ $a $b:
-    putvl^c:
-    v^equals^a^$b:
-    v^equals^b^$c:
-]:
+
+loop^8[block^]:
 ee^0:
 ```
 
