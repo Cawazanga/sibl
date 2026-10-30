@@ -1,9 +1,0 @@
-v^init^tt^0:
-v^init^ttt^0:
-iblock^:
-v^equals^tt^+ $tt 10:|
-v^equals^ttt^+ $ttt 1:|
-putvl^tt:|
-putvl^ttt:|%
-loop^5^[block^]:
-
