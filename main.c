@@ -31,6 +31,19 @@ int main(int argc, char **argv) {
                     char cmd[64];
                     checkwf(csev, cmd, '^');
                     if (strcmp(cmd, "iblock") == 0) {
+                        char bname[24];
+                        int idx = 1;
+                        int hasname = 0;
+                        if (strchr(csev, '^')) {
+                            checkwd(csev, '^', bname);
+                            if (bname[0] != '\0') {
+                                hasname = 1;
+                                int found = searchblock(bname);
+                                if (found >= 0) idx = found;
+                                else idx = countblockarr;
+                            }
+                        }
+                        char tmpblocks[28][64];
                         char blockline[128];
                         int i = 0;
                         while (i < 28 && fgets(blockline, sizeof(blockline), f)) {
@@ -39,17 +52,27 @@ int main(int argc, char **argv) {
                                 blockline[--blen] = '\0';
                             }
                             if (blen == 0) continue;
-                            
                             char *percent = strchr(blockline, '%');
                             if (percent) *percent = '\0';
                             if (blen > 0 && blockline[blen - 1] == '|') blockline[--blen] = '\0';
-                            
                             if (blen > 0) {
-                                strncpy(blockarr[1].blocks[i], blockline, 63);
-                                blockarr[1].blocks[i][63] = '\0';
+                                strncpy(tmpblocks[i], blockline, 63);
+                                tmpblocks[i][63] = '\0';
                                 i++;
                             }
                             if (percent) break;
+                        }
+                        if (hasname) {
+                            if (idx >= countblockarr) {
+                                strncpy(blockarr[countblockarr].name, bname, 11);
+                                blockarr[countblockarr].name[11] = '\0';
+                                memcpy(blockarr[countblockarr].blocks, tmpblocks, sizeof(tmpblocks));
+                                countblockarr++;
+                            } else {
+                                memcpy(blockarr[idx].blocks, tmpblocks, sizeof(tmpblocks));
+                            }
+                        } else {
+                            memcpy(blockarr[1].blocks, tmpblocks, sizeof(tmpblocks));
                         }
                     } else {
                         runfunc(csev);

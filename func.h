@@ -12,6 +12,7 @@ int searchvar(const char *namevar);
 int getnumargforvar(const char *argname);
 int rand_range(int min, int max);
 int searchdef(const char *namedef);
+int searchblock(const char *nameblock);
 bool ifthen(int charg, const char *fa, const char *sa);
 void initblockvar(const char *nameblock, char blockin[28][64]);
 void elsethen(const char *runbuf);

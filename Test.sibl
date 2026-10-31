@@ -1,0 +1,19 @@
+v^init^hh^10:
+
+iblock^Aa:
+putv^hh:|
+put^~~:|
+v^equals^hh^- $hh 1:|%
+
+iblock^A:
+putl^Begin block A:|
+loop^$hh[block^Aa]:|
+putl^End block A:|%
+
+iblock^B:
+putl^empty block:
+
+iblock^C:
+putl^empty block:
+
+block^A:

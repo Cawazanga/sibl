@@ -95,19 +95,19 @@ int runfunc(const char *bodyb) {
     }
     if (strcmp(namefunc, "loop") == 0) {
         char howmanyc[127];
-        char   cycbuf[127];
+        char cycbuf[127];
         check(bodyb, '^', howmanyc, '^');
         check(bodyb, '[', cycbuf, ']');
+        int count = 0;
         if (howmanyc[0] == '$') {
             char _2hmc[799];
             checkwd(howmanyc, '$', _2hmc);
-            for (int i = vararr[searchvar(_2hmc)].cap; i != 0; i--)
-                runfunc(cycbuf);
-        
+            count = vararr[searchvar(_2hmc)].cap;
         } else {
-        for (int i = atoi(howmanyc); i != 0; i--)
-            runfunc(cycbuf);
+            count = atoi(howmanyc);
         }
+        for (int i = count; i != 0; i--)
+            runfunc(cycbuf);
     }
     if (strcmp(namefunc, "ee") == 0) {
         char reresstr[99];
@@ -147,42 +147,67 @@ int runfunc(const char *bodyb) {
         elsethen(runbuf);
     }
     if (strcmp(namefunc, "block") == 0) {
+        char bname[24];
+        int idx = 1;
+        if (strchr(bodyb, '^')) {
+            checkwd(bodyb, '^', bname);
+            if (bname[0] != '\0' && strcmp(bname, ":") != 0) {
+                int found = searchblock(bname);
+                if (found >= 0) idx = found;
+                else idx = 1;
+            }
+        }
         int i = 0;
-        while (i < 28 && blockarr[1].blocks[i][0] != '\0') {
+        while (i < 28 && blockarr[idx].blocks[i][0] != '\0') {
             char runnow[64];
-            checkwf(blockarr[1].blocks[i], runnow, ':');
+            checkwf(blockarr[idx].blocks[i], runnow, ':');
             runfunc(runnow);
             i++;
         }
     }
     if (strcmp(namefunc, "iblock") == 0) {
+        char bname[24];
+        int idx = 1;
+        int hasname = 0;
+        if (strchr(bodyb, '^')) {
+            checkwd(bodyb, '^', bname);
+            if (bname[0] != '\0') {
+                hasname = 1;
+                int found = searchblock(bname);
+                if (found >= 0) idx = found;
+                else idx = countblockarr;
+            }
+        }
+        char tmpblocks[28][64];
         char line[128];
         int i = 0;
         while (i < 28 && fgets(line, sizeof(line), stdin)) {
             size_t len = strlen(line);
-        
             while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r')) {
                 line[--len] = '\0';
             }
             if (len == 0) continue;
-            
             char *percent = strchr(line, '%');
-            if (percent) {
-                *percent = '\0';
-                len = strlen(line);
-            }
-            
-            if (len > 0 && line[len - 1] == '|') {
-                line[--len] = '\0';
-            }
-            
+            if (percent) { *percent = '\0'; len = strlen(line); }
+            if (len > 0 && line[len - 1] == '|') { line[--len] = '\0'; }
             if (len > 0) {
-                strncpy(blockarr[1].blocks[i], line, 63);
-                blockarr[1].blocks[i][63] = '\0';
+                strncpy(tmpblocks[i], line, 63);
+                tmpblocks[i][63] = '\0';
                 i++;
             }
-            
             if (percent) break;
+        }
+        if (hasname) {
+            if (idx >= countblockarr) {
+                strncpy(blockarr[countblockarr].name, bname, 11);
+                blockarr[countblockarr].name[11] = '\0';
+                memcpy(blockarr[countblockarr].blocks, tmpblocks, sizeof(tmpblocks));
+                countblockarr++;
+            } else {
+                memcpy(blockarr[idx].blocks, tmpblocks, sizeof(tmpblocks));
+            }
+        } else {
+            memcpy(blockarr[1].blocks, tmpblocks, sizeof(tmpblocks));
         }
     }
     if (strcmp(namefunc, "getstr") == 0) {
