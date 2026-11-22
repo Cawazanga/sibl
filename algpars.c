@@ -1,4 +1,5 @@
 #include "func.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 int algpars(const char *buf) {
@@ -82,6 +83,9 @@ int algpars(const char *buf) {
             break;
         case '-':
             result = atoi(s1) - atoi(s2);
+            break;
+        case '_':
+            result = pow(atoi(s1), atoi(s2));
             break;
         default:
             puts("Error");
